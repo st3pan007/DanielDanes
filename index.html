@@ -10,13 +10,15 @@
     <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <!-- Preload -->
+    
+    <!-- Preload images -->
+    <!-- Hero -->
     <link rel="preload" as="image" href="./Fotky/HeroSekce/DanesHero1.jpg">
     <link rel="preload" as="image" href="./Fotky/HeroSekce/DanesHero2.jpg">
     <link rel="preload" as="image" href="./Fotky/HeroSekce/DanesHero3.jpg">
     <link rel="preload" as="image" href="./Fotky/HeroSekce/DanesHero4.jpg">
     <link rel="preload" as="image" href="./Fotky/DanielDanesLogo.png">
+    <!-- Galleries -->
     <link rel="preload" as="image" href="./Fotky/DanesStudio/ANNA-Úvod.jpg">
     <link rel="preload" as="image" href="./Fotky/DanesStudio/AMY-Úvod.jpg">
     <link rel="preload" as="image" href="./Fotky/DanesNábytek/LucemburskáÚvod.jpg">
@@ -347,7 +349,7 @@
             transform: scale(1.05);
         }
 
-        /* Brutal overlay - DESKTOP VŽDY VIDITELNÝ */
+        /* Desktop - overlay vždy viditelný */
         .gallery-preview-overlay {
             position: absolute;
             top: 0;
@@ -365,11 +367,11 @@
             pointer-events: none;
         }
 
-        /* Text wrapper pro správné zarovnání vlevo dole */
+        /* Desktop - text wrapper */
         .gallery-preview-text-wrapper {
             text-align: left;
             width: 100%;
-            padding-right: 80px; /* Místo pro tlačítko vpravo */
+            padding-right: 80px;
         }
 
         .gallery-preview-number {
@@ -398,7 +400,7 @@
             margin-bottom: 0;
         }
 
-        /* Desktop tlačítko - kolečko vpravo dole */
+        /* Desktop tlačítko */
         .gallery-preview-btn {
             position: absolute;
             bottom: 40px;
@@ -431,7 +433,7 @@
             transform: scale(1.1);
         }
 
-        /* Skrýt text tlačítka na desktopu */
+        /* Skrýt text tlačítka */
         .gallery-preview-btn-text {
             display: none;
         }
@@ -481,7 +483,7 @@
             transform: scale(1.05);
         }
 
-        /* Brutal overlay - DESKTOP VŽDY VIDITELNÝ */
+        /* Desktop - overlay vždy viditelný */
         .masonry-overlay {
             position: absolute;
             top: 0;
@@ -499,11 +501,11 @@
             pointer-events: none;
         }
 
-        /* Text wrapper pro správné zarovnání vlevo dole */
+        /* Desktop - text wrapper */
         .masonry-text-wrapper {
             text-align: left;
             width: 100%;
-            padding-right: 80px; /* Místo pro tlačítko vpravo */
+            padding-right: 80px;
         }
 
         .masonry-number {
@@ -531,7 +533,7 @@
             margin-bottom: 0;
         }
 
-        /* Desktop tlačítko - kolečko vpravo dole */
+        /* Desktop tlačítko */
         .masonry-btn {
             position: absolute;
             bottom: 30px;
@@ -932,7 +934,7 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            /* Zabránit horizontálnímu scrollování */
+            /* Mobile */
             * {
                 max-width: 100vw !important;
             }
@@ -1013,24 +1015,18 @@
                 height: 400px;
             }
 
-            /* Na mobilu overlay PRŮHLEDNÝ (ne skrytý), zobrazí se přes Intersection Observer */
+            /* Mobile - overlay vždy viditelný */
             .gallery-preview-overlay {
                 padding: 30px;
-                opacity: 0.3; /* Změna z 0 na 0.3 - fotky zůstanou v paměti */
+                opacity: 1 !important;
                 background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.95) 100%);
                 justify-content: flex-end;
                 align-items: flex-start;
-                transition: opacity 0.3s ease;
             }
 
             .gallery-preview-text-wrapper {
                 text-align: left;
-                padding-right: 70px; /* Místo pro tlačítko */
-            }
-
-            /* Když je karta aktivní (ve středu viewportu) */
-            .gallery-preview-card.active .gallery-preview-overlay {
-                opacity: 1;
+                padding-right: 70px;
             }
 
             .gallery-preview-number {
@@ -1047,7 +1043,7 @@
                 font-size: 0.95rem;
             }
 
-            /* Mobilní tlačítko - jen kolečko se šipkou */
+            /* Mobilní tlačítko */
             .gallery-preview-btn {
                 position: absolute;
                 bottom: 25px;
@@ -1071,7 +1067,7 @@
                 line-height: 1;
             }
 
-            /* Skrýt původní text na mobilu */
+            /* Skrýt text */
             .gallery-preview-btn-text {
                 display: none;
             }
@@ -1103,24 +1099,18 @@
                 margin-bottom: 0;
             }
 
-            /* Na mobilu overlay PRŮHLEDNÝ (ne skrytý), zobrazí se přes Intersection Observer */
+            /* Mobile - overlay vždy viditelný */
             .masonry-overlay {
                 padding: 30px;
-                opacity: 0.3; /* Změna z 0 na 0.3 - fotky zůstanou v paměti */
+                opacity: 1 !important;
                 background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.95) 100%);
                 justify-content: flex-end;
                 align-items: flex-start;
-                transition: opacity 0.3s ease;
             }
 
             .masonry-text-wrapper {
                 text-align: left;
-                padding-right: 70px; /* Místo pro tlačítko */
-            }
-
-            /* Když je karta aktivní (ve středu viewportu) */
-            .masonry-item.active .masonry-overlay {
-                opacity: 1;
+                padding-right: 70px;
             }
 
             .masonry-number {
@@ -1137,7 +1127,7 @@
                 font-size: 0.95rem;
             }
 
-            /* Mobilní tlačítko - jen kolečko se šipkou */
+            /* Mobilní tlačítko */
             .masonry-btn {
                 position: absolute;
                 bottom: 25px;
@@ -1161,7 +1151,7 @@
                 line-height: 1;
             }
 
-            /* Skrýt původní text na mobilu */
+            /* Skrýt text */
             .masonry-btn-text {
                 display: none;
             }
@@ -1603,16 +1593,16 @@
     </div>
 
     <script>
-        // Gallery Data - pouze názvy, fotky se načtou až po kliknutí
+        // Gallery Data - lazy loading
         const galleryData = {
             anna: {
                 title: 'Vana ANNA',
-                images: null, // Načte se až po kliknutí
+                images: null,
                 imageCount: 4
             },
             amy: {
                 title: 'Knihovna AMY',
-                images: null, // Načte se až po kliknutí
+                images: null,
                 imageCount: 4
             },
             lucemburska: {
@@ -1637,9 +1627,9 @@
             }
         };
 
-        // Funkce pro lazy loading galerií
+        // Lazy loading galerií
         function loadGalleryImages(galleryName) {
-            if (galleryData[galleryName].images) return; // Už načteno
+            if (galleryData[galleryName].images) return;
             
             // Definice cest k fotkám pro každou galerii
             const galleryPaths = {
@@ -1700,7 +1690,7 @@
         let touchStartX = 0;
         let touchEndX = 0;
 
-        // Loader - počká na načtení všech náhledových fotek
+        // Loader
         window.addEventListener('load', () => {
             // Počkáme až se načtou všechny preloadované fotky
             const preloadedImages = document.querySelectorAll('link[rel="preload"][as="image"]');
@@ -1711,7 +1701,7 @@
             const hideLoader = () => {
                 setTimeout(() => {
                     document.getElementById('loader').classList.add('hidden');
-                }, 500); // Malé zpoždění pro plynulý přechod
+                }, 500);
             };
             
             // Pokud nejsou žádné preloady, skryj loader
@@ -1812,7 +1802,6 @@
         const lightboxClose = lightbox.querySelector('.lightbox-close');
 
         function openLightbox(galleryName, imageIndex = 0) {
-            // Načti fotky galerie pokud ještě nejsou načtené
             loadGalleryImages(galleryName);
             
             currentGallery = galleryData[galleryName];
@@ -1950,57 +1939,7 @@
             });
         });
 
-        // Intersection Observer pro mobilní galerie
-        function initMobileGalleryObserver() {
-            // Kontrola, zda jsme na mobilu
-            if (window.innerWidth > 768) return;
-
-            const options = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.5 // Aktivuje se když je 50% položky vidět
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    } else {
-                        entry.target.classList.remove('active');
-                    }
-                });
-            }, options);
-
-            // Sleduj všechny gallery karty
-            document.querySelectorAll('.gallery-preview-card').forEach(card => {
-                observer.observe(card);
-            });
-
-            document.querySelectorAll('.masonry-item').forEach(item => {
-                observer.observe(item);
-            });
-        }
-
-        // Inicializace při načtení stránky
-        document.addEventListener('DOMContentLoaded', initMobileGalleryObserver);
-
-        // Re-inicializace při změně velikosti okna
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                // Zrušit sledování při přechodu na desktop
-                if (window.innerWidth > 768) {
-                    document.querySelectorAll('.gallery-preview-card, .masonry-item').forEach(el => {
-                        el.classList.remove('active');
-                    });
-                } else {
-                    initMobileGalleryObserver();
-                }
-            }, 250);
-        });
-
-        // GSAP Animations - Simple fade in only
+        // GSAP Animations
         gsap.registerPlugin(ScrollTrigger);
 
         // Animate gateway cards
