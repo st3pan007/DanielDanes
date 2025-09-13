@@ -10,10 +10,19 @@
     <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Preload critical images -->
+
+    <!-- Preload -->
     <link rel="preload" as="image" href="./Fotky/HeroSekce/DanesHero1.jpg">
+    <link rel="preload" as="image" href="./Fotky/HeroSekce/DanesHero2.jpg">
+    <link rel="preload" as="image" href="./Fotky/HeroSekce/DanesHero3.jpg">
+    <link rel="preload" as="image" href="./Fotky/HeroSekce/DanesHero4.jpg">
     <link rel="preload" as="image" href="./Fotky/DanielDanesLogo.png">
+    <link rel="preload" as="image" href="./Fotky/DanesStudio/ANNA-Úvod.jpg">
+    <link rel="preload" as="image" href="./Fotky/DanesStudio/AMY-Úvod.jpg">
+    <link rel="preload" as="image" href="./Fotky/DanesNábytek/LucemburskáÚvod.jpg">
+    <link rel="preload" as="image" href="./Fotky/DanesNábytek/RezidenceMandlovec-Úvod.jpg">
+    <link rel="preload" as="image" href="./Fotky/DanesNábytek/RezidenceSedmikráska-Úvod.jpg">
+    <link rel="preload" as="image" href="./Fotky/DanesNábytek/V-Tower-Úvod.jpg">
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -1004,13 +1013,14 @@
                 height: 400px;
             }
 
-            /* Na mobilu overlay SKRYTÝ, zobrazí se přes Intersection Observer */
+            /* Na mobilu overlay PRŮHLEDNÝ (ne skrytý), zobrazí se přes Intersection Observer */
             .gallery-preview-overlay {
                 padding: 30px;
-                opacity: 0;
+                opacity: 0.3; /* Změna z 0 na 0.3 - fotky zůstanou v paměti */
                 background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.95) 100%);
                 justify-content: flex-end;
                 align-items: flex-start;
+                transition: opacity 0.3s ease;
             }
 
             .gallery-preview-text-wrapper {
@@ -1093,13 +1103,14 @@
                 margin-bottom: 0;
             }
 
-            /* Na mobilu overlay SKRYTÝ, zobrazí se přes Intersection Observer */
+            /* Na mobilu overlay PRŮHLEDNÝ (ne skrytý), zobrazí se přes Intersection Observer */
             .masonry-overlay {
                 padding: 30px;
-                opacity: 0;
+                opacity: 0.3; /* Změna z 0 na 0.3 - fotky zůstanou v paměti */
                 background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.95) 100%);
                 justify-content: flex-end;
                 align-items: flex-start;
+                transition: opacity 0.3s ease;
             }
 
             .masonry-text-wrapper {
@@ -1592,29 +1603,59 @@
     </div>
 
     <script>
-        // Gallery Data
+        // Gallery Data - pouze názvy, fotky se načtou až po kliknutí
         const galleryData = {
             anna: {
                 title: 'Vana ANNA',
-                images: [
+                images: null, // Načte se až po kliknutí
+                imageCount: 4
+            },
+            amy: {
+                title: 'Knihovna AMY',
+                images: null, // Načte se až po kliknutí
+                imageCount: 4
+            },
+            lucemburska: {
+                title: 'Lucemburská',
+                images: null, // Načte se až po kliknutí
+                imageCount: 11
+            },
+            mandlovec: {
+                title: 'Rezidence Mandlovec',
+                images: null, // Načte se až po kliknutí
+                imageCount: 6
+            },
+            sedmikraska: {
+                title: 'Rezidence Sedmikráska',
+                images: null, // Načte se až po kliknutí
+                imageCount: 6
+            },
+            vtower: {
+                title: 'V-Tower',
+                images: null, // Načte se až po kliknutí
+                imageCount: 3
+            }
+        };
+
+        // Funkce pro lazy loading galerií
+        function loadGalleryImages(galleryName) {
+            if (galleryData[galleryName].images) return; // Už načteno
+            
+            // Definice cest k fotkám pro každou galerii
+            const galleryPaths = {
+                anna: [
                     './Fotky/DanesStudio/ANNA1.jpg',
                     './Fotky/DanesStudio/ANNA2.jpg',
                     './Fotky/DanesStudio/ANNA3.jpg',
                     './Fotky/DanesStudio/ANNA4.jpg'
-                ]
-            },
-            amy: {
-                title: 'Knihovna AMY',
-                images: [
+                ],
+                amy: [
                     './Fotky/DanesStudio/AMY1.jpg',
                     './Fotky/DanesStudio/AMY2.jpg',
                     './Fotky/DanesStudio/AMY3.jpg',
                     './Fotky/DanesStudio/AMY4.jpg'
-                ]
-            },
-            lucemburska: {
-                title: 'Lucemburská',
-                images: [
+                ],
+                lucemburska: [
                     './Fotky/DanesNábytek/Lucemburská (1).jpg',
                     './Fotky/DanesNábytek/Lucemburská (3).jpg',
                     './Fotky/DanesNábytek/Lucemburská (4).jpg',
@@ -1626,39 +1667,32 @@
                     './Fotky/DanesNábytek/Lucemburská (10).jpg',
                     './Fotky/DanesNábytek/Lucemburská (11).jpg',
                     './Fotky/DanesNábytek/Lucemburská (13).jpg'
-                ]
-            },
-            mandlovec: {
-                title: 'Rezidence Mandlovec',
-                images: [
+                ],
+                mandlovec: [
                     './Fotky/DanesNábytek/RezidenceMandlovec (1).jpg',
                     './Fotky/DanesNábytek/RezidenceMandlovec (2).jpg',
                     './Fotky/DanesNábytek/RezidenceMandlovec (3).jpg',
                     './Fotky/DanesNábytek/RezidenceMandlovec (4).jpg',
                     './Fotky/DanesNábytek/RezidenceMandlovec (5).jpg',
                     './Fotky/DanesNábytek/RezidenceMandlovec (6).jpg'
-                ]
-            },
-            sedmikraska: {
-                title: 'Rezidence Sedmikráska',
-                images: [
+                ],
+                sedmikraska: [
                     './Fotky/DanesNábytek/RezidenceSedmikráska (1).jpg',
                     './Fotky/DanesNábytek/RezidenceSedmikráska (2).jpg',
                     './Fotky/DanesNábytek/RezidenceSedmikráska (3).jpg',
                     './Fotky/DanesNábytek/RezidenceSedmikráska (4).jpg',
                     './Fotky/DanesNábytek/RezidenceSedmikráska (5).jpg',
                     './Fotky/DanesNábytek/RezidenceSedmikráska (6).jpg'
-                ]
-            },
-            vtower: {
-                title: 'V-Tower',
-                images: [
+                ],
+                vtower: [
                     './Fotky/DanesNábytek/V-Tower (1).jpg',
                     './Fotky/DanesNábytek/V-Tower (2).jpg',
                     './Fotky/DanesNábytek/V-Tower (3).jpg'
                 ]
-            }
-        };
+            };
+            
+            galleryData[galleryName].images = galleryPaths[galleryName];
+        }
 
         // Lightbox Variables
         let currentGallery = null;
@@ -1666,11 +1700,40 @@
         let touchStartX = 0;
         let touchEndX = 0;
 
-        // Loader
+        // Loader - počká na načtení všech náhledových fotek
         window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loader').classList.add('hidden');
-            }, 1500);
+            // Počkáme až se načtou všechny preloadované fotky
+            const preloadedImages = document.querySelectorAll('link[rel="preload"][as="image"]');
+            let loadedCount = 0;
+            const totalImages = preloadedImages.length;
+            
+            // Funkce pro skrytí loaderu
+            const hideLoader = () => {
+                setTimeout(() => {
+                    document.getElementById('loader').classList.add('hidden');
+                }, 500); // Malé zpoždění pro plynulý přechod
+            };
+            
+            // Pokud nejsou žádné preloady, skryj loader
+            if (totalImages === 0) {
+                hideLoader();
+                return;
+            }
+            
+            // Kontrola načtení každé fotky
+            preloadedImages.forEach(link => {
+                const img = new Image();
+                img.onload = img.onerror = () => {
+                    loadedCount++;
+                    if (loadedCount === totalImages) {
+                        hideLoader();
+                    }
+                };
+                img.src = link.href;
+            });
+            
+            // Záložní timeout pro případ problémů s načítáním
+            setTimeout(hideLoader, 5000);
         });
 
         // Navigation Scroll
@@ -1749,6 +1812,9 @@
         const lightboxClose = lightbox.querySelector('.lightbox-close');
 
         function openLightbox(galleryName, imageIndex = 0) {
+            // Načti fotky galerie pokud ještě nejsou načtené
+            loadGalleryImages(galleryName);
+            
             currentGallery = galleryData[galleryName];
             currentImageIndex = imageIndex;
             
